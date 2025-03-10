@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function Analytics() {
-  return (
-    <div>
-      My Analytics
-    </div>
-  )
+  return <div>My Analytics</div>;
 }
 
-export default Analytics
+export default Analytics;

@@ -8,7 +8,7 @@ import { myData } from "../Data";
 
 function Dashboard() {
   const navigate = useNavigate();
-  // Check if the user is 
+  // Check if the user is
   // logged in by checking localStorage
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("users")); // Get user from localStorage
@@ -16,18 +16,18 @@ function Dashboard() {
       // If user is not logged in, redirect to login page
       navigate("/"); // Redirect to login
     }
-  }, [navigate]);  // Run the effect only once when the component mounts
+  }, [navigate]); // Run the effect only once when the component mounts
 
   return (
     <div className="pb-10">
       <div className="flex flex-wrap-reverse justify-end">
         <Link to={"/Mycart"}>
-  <button   className="text-white size-6 font-light animate-bounce w-25 h-10 rounded-2xl bg-fuchsia-900 flex items-center">
-    <FiShoppingCart className="text-2xl pb-2 mr-1" />
-    My Cart
-  </button>
-  </Link>
-</div>
+          <button className="text-white size-6 font-light animate-bounce w-25 h-10 rounded-2xl bg-fuchsia-900 flex items-center">
+            <FiShoppingCart className="text-2xl pb-2 mr-1" />
+            My Cart
+          </button>
+        </Link>
+      </div>
 
       <div className="flex pb-5 h-[50vh]">
         {/* Div 1 (70% width) */}

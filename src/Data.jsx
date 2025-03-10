@@ -31,7 +31,8 @@ export const myData = [
     price: "$65.00",
     title: "SNEAKERS",
     category: "Running",
-  },{
+  },
+  {
     key: 5,
     img: Boot6,
     price: "$65.00",
