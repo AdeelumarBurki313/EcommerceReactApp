@@ -7,6 +7,7 @@ import silder from "../assets/slider.png";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import shop from '../assets/shop.png'
 
 function Registration() {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -74,8 +75,8 @@ function Registration() {
           <div className="hidden sm:flex flex-col items-center md:items-start justify-center space-y-4 w-full md:w-1/2 bg-[#89089f] text-white rounded-lg p-6 py-12">
             <div className="flex flex-col items-center space-y-4">
               <img
-                src="https://websharthi.com/svg/e1.png"
-                alt="Imported Shoes"
+                src={shop}
+                alt="shop image"
                 className="w-3/4"
               />
               <h1 className="font-medium text-xl">Welcome to our shop</h1>

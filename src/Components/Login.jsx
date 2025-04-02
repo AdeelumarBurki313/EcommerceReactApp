@@ -7,6 +7,7 @@ import silder from "../assets/slider.png";
 import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import shop from '../assets/shop.png'
 
 function Login() {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -19,19 +20,18 @@ function Login() {
   };
 
   const handleLogin = () => {
-    // Check if email and password are provided
     if (!email || !password) {
       toast.error("Please enter both email and password.", {
         position: "top-center",
         autoClose: 1500,
         style: { backgroundColor: "#FFA500", color: "white", fontWeight: "bold" },
       });
-      return; // Exit the function early if fields are empty
+      return; 
     }
 
     const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-    // Check if the user exists and credentials match
+  
     const user = existingUsers.find(
       (user) => user.email === email && user.password === password
     );
@@ -46,7 +46,7 @@ function Login() {
       localStorage.setItem("isLoggedIn", "true");
       setTimeout(() => {
         navigate("/dashboard");
-      }, 1500); // Redirect after 1.5 seconds
+      }, 1500); 
     } else {
       toast.error("Invalid credentials. Please try again.", {
         position: "top-center",
@@ -63,8 +63,8 @@ function Login() {
           <div className="flex flex-col items-center md:items-start justify-center space-y-4 w-full md:w-1/2 bg-[#89089f] text-white rounded-lg p-6 py-12">
             <div className="flex flex-col items-center space-y-4">
               <img
-                src="https://websharthi.com/svg/e1.png"
-                alt="Imported Shoes"
+                src={shop}
+                alt="Shop Image"
                 className="w-3/4"
               />
               <h1 className="font-medium text-xl">Welcome to our shop</h1>
@@ -134,8 +134,6 @@ function Login() {
           </div>
         </div>
       </div>
-
-      {/* Toast Container */}
       <ToastContainer />
     </div>
   );

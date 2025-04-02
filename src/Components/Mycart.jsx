@@ -1,65 +1,62 @@
 import React, { useState, useEffect } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaShoppingCart } from "react-icons/fa";
-import { toast, ToastContainer } from "react-toastify"; 
-import "react-toastify/dist/ReactToastify.css"; 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Mycart() {
   const [cartItems, setCartItems] = useState([]);
-
-  // Retrieve cart items from localStorage when the component mounts
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     setCartItems(cart);
   }, []);
 
   const handleRemoveFromCart = (key) => {
-  
-    const updatedCart = cartItems.filter((item) => item.key !== key);
-    setCartItems(updatedCart);
-    
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    const updatedCart = cartItems.filter((item) => item.key !== key); 
+    setCartItems(updatedCart); // Update state
+    localStorage.setItem("cart", JSON.stringify(updatedCart)); 
 
-   
     toast.error("Item removed from cart", {
       position: "top-center",
-      autoClose: 2000,  
-      style: { backgroundColor: 'orange', color: 'white', fontWeight: 'bold' },
+      autoClose: 2000,
+      style: { backgroundColor: "orange", color: "white", fontWeight: "bold" },
     });
   };
 
   const handleQuantityChange = (key, operation) => {
-    // Update item quantity
     const updatedCart = cartItems.map((item) => {
       if (item.key === key) {
         let updatedQuantity = item.quantity;
         if (operation === "increment") {
           updatedQuantity += 1;
-        } else if (operation === "decrement" && item.quantity > 1) {
+        } else if (operation === "decrement" && updatedQuantity > 1) {
           updatedQuantity -= 1;
         }
-        return { ...item, quantity: updatedQuantity };
+        return { ...item, quantity: updatedQuantity }; 
       }
-      return item;
+      return item; 
     });
 
-    setCartItems(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    setCartItems(updatedCart); // Update state
+    localStorage.setItem("cart", JSON.stringify(updatedCart)); 
   };
+
+  const totalPrice = cartItems.reduce(
+    (total, item) => {
+      const price = typeof item.price === "string" ? item.price.replace("$", "") : item.price;
+      return total + item.quantity * parseFloat(price);},0);
 
   return (
     <div className="p-4">
-
       <ToastContainer />
-
-      <h1 className="text-4xl font-bold mb-2 flex gap-2 ">
+      <h1 className="text-4xl font-bold mb-2 flex gap-2">
         <FaShoppingCart className="text-5xl min-w-[1.25rem]" /> My Cart
       </h1>
       <div className="space-y-4">
         {cartItems.length > 0 ? (
-          cartItems.map((item) => (
+          cartItems.map((item, index) => (
             <div
-              key={item.key}
+              key={item.key || item.id || index}
               className="flex justify-between items-center p-4 bg-white shadow-md rounded-lg"
             >
               <img
@@ -98,6 +95,11 @@ function Mycart() {
         ) : (
           <p className="text-2xl">Your cart is empty.</p>
         )}
+      </div>
+
+      <div className="flex justify-between mt-4 font-bold text-xl">
+        <span>Total Price:</span>
+        <span>${totalPrice.toFixed(2)}</span>
       </div>
     </div>
   );

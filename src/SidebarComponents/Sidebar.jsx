@@ -28,7 +28,6 @@ function Sidebar() {
       navigate("/");
     }, 1500); 
   };
-
   return (
     <div className="group flex flex-col fixed h-screen w-20 hover:w-64 transition-all duration-300 ease-in-out bg-[#89089f] hover:bg-white text-white border-r-2 border-transparent hover:border-[#89089f] z-70">
       <div className="flex flex-col justify-between h-full p-2 group-hover:p-4">
